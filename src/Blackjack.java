@@ -95,7 +95,12 @@ public class Blackjack {
                     System.out.println("PLAYER: "+playerSum);
 
                     String message = "";
-                    if(playerSum > dealerSum){
+                    if(playerSum > 21){
+                        message = "You busted";
+                    }
+                    else if(dealerSum > 21){
+                        message = "Deal Busted";
+                    } else if(playerSum > dealerSum){
                         message += "You Win!";
                     }
                     else if(playerSum < dealerSum){
