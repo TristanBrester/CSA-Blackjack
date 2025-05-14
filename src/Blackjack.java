@@ -94,7 +94,16 @@ public class Blackjack {
                     System.out.println("DEALER: " + dealerSum);
                     System.out.println("PLAYER: "+playerSum);
 
-                    String message = "TEST";
+                    String message = "";
+                    if(playerSum > dealerSum){
+                        message += "You Win!";
+                    }
+                    else if(playerSum < dealerSum){
+                        message += "Dealer Wins :(";
+                    }
+                    else{
+                        message += "Push";
+                    }
 
                     //if statements to update message is WIN, LOSE, PUSH(DRAW or TIE) based on score
 
@@ -112,6 +121,7 @@ public class Blackjack {
     JPanel buttonPanel = new JPanel();
     JButton hitButton = new JButton("Hit");
     JButton stayButton = new JButton("Stay");
+    JButton newGame = new JButton("New Game");
 
     public Blackjack(){
         startGame();
@@ -130,6 +140,8 @@ public class Blackjack {
         buttonPanel.add(hitButton);
         stayButton.setFocusable(false);
         buttonPanel.add(stayButton);
+        newGame.setFocusable(false);
+        buttonPanel.add(newGame);
         frame.add(buttonPanel,BorderLayout.SOUTH);
 
         hitButton.addActionListener(new ActionListener() {
@@ -165,6 +177,24 @@ public class Blackjack {
                 }
                 gamePanel.repaint();
             }
+        });
+        gamePanel.repaint();
+
+        newGame.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e){
+               hitButton.setEnabled(true);
+               stayButton.setEnabled(true);
+
+               playerHand.clear();
+               dealerHand.clear();
+               deck.clear();
+               dealerAceCount = 0;
+               playerSum = 0;
+               playerAceCount = 0;
+
+               startGame();
+               gamePanel.repaint();
+           }
         });
         gamePanel.repaint();
     }
